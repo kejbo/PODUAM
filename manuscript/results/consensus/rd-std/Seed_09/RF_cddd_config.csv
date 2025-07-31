@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.3490136867801286,0.7144875888480147,512,"OrderedDict([('max_depth', 14), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3571158863744339,0.5940946994153433,512,"OrderedDict([('max_depth', 17), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001111499540478716), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.36324095457319966,0.6110478875339745,512,"OrderedDict([('max_depth', 18), ('max_features', 0.7616278353910879), ('max_samples', 0.9984699458599716), ('min_impurity_decrease', 0.0010107157050252712), ('min_samples_leaf', 2), ('n_estimators', 924)])"
+0.3528981069744691,0.6046391139090534,512,"OrderedDict([('max_depth', 15), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 100)])"
+0.4213193227082739,0.7030251361534268,512,"OrderedDict([('max_depth', 14), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 6), ('n_estimators', 1000)])"
+0.35006389905832747,0.6260161312416949,512,"OrderedDict([('max_depth', 14), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3948235056690209,0.6934211563842422,512,"OrderedDict([('max_depth', 16), ('max_features', 0.5223835679421417), ('max_samples', 0.9648754976094756), ('min_impurity_decrease', 0.0012194140397142372), ('min_samples_leaf', 3), ('n_estimators', 155)])"
+0.34712063183160985,0.6214912548061093,512,"OrderedDict([('max_depth', 16), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3463824967763476,0.7230602808811735,512,"OrderedDict([('max_depth', 14), ('max_features', 0.5617094224260228), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.33588429459156804,0.8714575825995521,512,"OrderedDict([('max_depth', 17), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"

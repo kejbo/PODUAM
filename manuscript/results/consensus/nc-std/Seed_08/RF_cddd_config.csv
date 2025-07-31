@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.355981560687653,0.8699839809132798,512,"OrderedDict([('max_depth', 18), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3574568819721637,0.7343731254590173,512,"OrderedDict([('max_depth', 20), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.35641846141932254,0.8063845212310456,512,"OrderedDict([('max_depth', 16), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.35741299724478703,0.7019940953461093,512,"OrderedDict([('max_depth', 18), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3558271427821677,0.8165158660622407,512,"OrderedDict([('max_depth', 19), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.36065782337870383,0.7080726194080722,512,"OrderedDict([('max_depth', 20), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.36385072565699755,0.7186496122568159,512,"OrderedDict([('max_depth', 14), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.36041914385185714,0.7119893983178353,512,"OrderedDict([('max_depth', 16), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3587326249615928,0.7162327457704228,512,"OrderedDict([('max_depth', 19), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3568647362574044,0.7777564036557194,512,"OrderedDict([('max_depth', 20), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"

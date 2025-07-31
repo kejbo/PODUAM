@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+1.0833476272130031e-07,0.581398462824853,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 8), ('weights', 'distance')])"
+1.1022312932366803e-07,0.6281424214876085,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 8), ('weights', 'distance')])"
+9.476455496840772e-08,0.635433937779844,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 7), ('weights', 'distance')])"
+9.670206354340225e-08,0.6347450110266838,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 7), ('weights', 'distance')])"
+1.104277112687727e-07,0.6512330821850805,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 8), ('weights', 'distance')])"
+1.422412781509401e-07,0.5487502691396626,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 10), ('weights', 'distance')])"
+1.428701734705458e-07,0.7514400104641531,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 11), ('weights', 'distance')])"
+1.214785504883315e-07,0.6843579724068776,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 9), ('weights', 'distance')])"
+1.1029480235319756e-07,0.6076932141215793,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 8), ('weights', 'distance')])"
+1.0868405198085598e-07,0.8288389896084398,512,"OrderedDict([('metric', 'minkowski'), ('n_neighbors', 8), ('weights', 'distance')])"

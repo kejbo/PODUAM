@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.34605970179108964,0.6193416609023779,512,"OrderedDict([('max_depth', 18), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.345115665170259,0.7128148661284563,512,"OrderedDict([('max_depth', 16), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3505942501352007,0.6230212747785446,512,"OrderedDict([('max_depth', 14), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3468298537436184,0.6237423473039898,512,"OrderedDict([('max_depth', 20), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.34596927235620567,0.6283873896969054,512,"OrderedDict([('max_depth', 19), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3440995230185943,0.6873788899903507,512,"OrderedDict([('max_depth', 19), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.34681775276174803,0.6347012377225213,512,"OrderedDict([('max_depth', 17), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3430014864289749,0.8777423607606826,512,"OrderedDict([('max_depth', 13), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3512787182990902,0.6432403905445077,512,"OrderedDict([('max_depth', 18), ('max_features', 0.5), ('max_samples', 0.9473721868062732), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3458596254564344,0.6648514535514215,512,"OrderedDict([('max_depth', 20), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 806)])"

@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.35892140947459245,0.6642507031822575,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.2360384642078738), ('optimizer__learning_rate', 0.0014896085501769315), ('optimizer__weight_decay', 0.1)])"
+0.32743804148843775,0.6763859410486089,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.1216679677341995), ('optimizer__learning_rate', 0.002859975932024275), ('optimizer__weight_decay', 0.00013872355114177362)])"
+0.37032939050423447,0.6322521838223935,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.22808108921518144), ('optimizer__learning_rate', 0.0016931546338289163), ('optimizer__weight_decay', 0.1)])"
+0.3472918722838354,0.6929848944180501,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.21532240240373798), ('optimizer__learning_rate', 0.0032584206672496784), ('optimizer__weight_decay', 1e-05)])"
+0.38626268542548353,0.6575263889937152,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.38874646144224184), ('optimizer__learning_rate', 0.005254829668900941), ('optimizer__weight_decay', 0.1)])"
+0.43478568876606083,0.929630340137598,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3200880811868277), ('optimizer__learning_rate', 0.0034565222735611022), ('optimizer__weight_decay', 0.1)])"
+0.3609435700303202,0.6482430526074408,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.10872580597344489), ('optimizer__learning_rate', 0.005188391034770088), ('optimizer__weight_decay', 0.08700093500029622)])"
+0.35049337693596017,0.6166878344340331,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.17872236450913145), ('optimizer__learning_rate', 0.002532675409413566), ('optimizer__weight_decay', 1e-05)])"
+0.32355307450161436,0.6481065052351132,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.07584062865292643), ('optimizer__learning_rate', 0.002816505235394075), ('optimizer__weight_decay', 0.1)])"
+0.3833867624425981,0.6470983909831016,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.2786705153596966), ('optimizer__learning_rate', 0.0018841708328954081), ('optimizer__weight_decay', 0.012115798761315353)])"

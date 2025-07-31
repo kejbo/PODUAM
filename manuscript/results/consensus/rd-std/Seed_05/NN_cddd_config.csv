@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.34769416712115436,0.6712194403891475,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 1e-05)])"
+0.42222400263314247,0.5783271707762561,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.4615232336226156), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.3289338270231624,0.6049523402205053,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3575150796886327), ('optimizer__learning_rate', 0.008604606951754482), ('optimizer__weight_decay', 0.005570320214675612)])"
+0.4773784872535612,0.6269513513523951,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.4430249804077907), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.08302242896441121)])"
+0.40567446007507546,0.6556050972684737,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.49527082467734174), ('optimizer__learning_rate', 0.009488557660736821), ('optimizer__weight_decay', 0.035216013672774334)])"
+0.44004907271622223,0.6472538908231792,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 3.737838279597503e-05)])"
+0.5133956848465229,0.8286084685820735,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.0037293822040695276), ('optimizer__weight_decay', 0.021156277811593766)])"
+0.36756633645910597,0.6535236062448267,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.48524740510722536), ('optimizer__learning_rate', 0.009607593186701367), ('optimizer__weight_decay', 0.0001901640879785773)])"
+0.360419734044979,0.5965707731218055,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.004880764771113942), ('optimizer__weight_decay', 0.1)])"
+0.4044072850771255,0.5651641103329352,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.008464794715030137), ('optimizer__weight_decay', 1e-05)])"

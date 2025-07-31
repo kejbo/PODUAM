@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.550544889044813,0.7063470262735062,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.21585547588026227), ('optimizer__learning_rate', 0.008652054107789615), ('optimizer__weight_decay', 0.06269425525194175)])"
+0.6614571943397568,0.6260899909276777,135,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.19542568771435775), ('optimizer__learning_rate', 0.005809888897725764), ('optimizer__weight_decay', 0.04894167278486362)])"
+0.5862556225359602,0.6364368525091023,135,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.34374505592825955), ('optimizer__learning_rate', 0.0047657451762544425), ('optimizer__weight_decay', 2.7064194879873144e-05)])"
+0.5357918677989545,0.6742174117962019,136,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.522344875256056,0.7434040695547756,135,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.32549711701927975), ('optimizer__learning_rate', 0.004091437553527327), ('optimizer__weight_decay', 0.1)])"
+0.5705895300675813,0.666557681782411,135,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.13962900439434778), ('optimizer__learning_rate', 0.001961730521423725), ('optimizer__weight_decay', 8.502487799393185e-05)])"
+0.4953539618816112,0.6002001265348934,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.25508180365448885), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.6739171130447666,0.6319797959653684,136,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.2592758752509625), ('optimizer__learning_rate', 0.005401268298569866), ('optimizer__weight_decay', 0.005250009434954013)])"
+0.6162948179593634,0.5542878443976215,135,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.5039178363192327,0.8831833307647734,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.2837518219702948), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.05281886734448949)])"

@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.3815643056129582,0.7590923788183422,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.4862023757289326), ('optimizer__learning_rate', 0.009739624302906124), ('optimizer__weight_decay', 1.0566035269199404e-05)])"
+0.4377497144972997,0.6513650372718939,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.326127722482604,0.6724588653586386,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.38960691099235883), ('optimizer__learning_rate', 0.004240531337931943), ('optimizer__weight_decay', 0.1)])"
+0.4142653698899038,0.6531556089458478,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.4995205835613461), ('optimizer__learning_rate', 0.0032744838901156976), ('optimizer__weight_decay', 0.00010549161916432877)])"
+0.3877658010238594,0.6039594755487403,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.42348400895089644,0.5921278420567203,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.4949299610026373), ('optimizer__learning_rate', 0.006805973703777544), ('optimizer__weight_decay', 0.07798647691838552)])"
+0.49903950707415196,0.5747101017599622,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.006114672785289085), ('optimizer__weight_decay', 0.1)])"
+0.38535088560030095,0.625121150424606,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.434926741262699), ('optimizer__learning_rate', 0.005004880984478563), ('optimizer__weight_decay', 1e-05)])"
+0.41932807900725955,0.6179399357903959,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.4877501817245078), ('optimizer__learning_rate', 0.007912426431555377), ('optimizer__weight_decay', 1e-05)])"
+0.3662332553435896,0.6008025807030469,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3494761496390429), ('optimizer__learning_rate', 0.00327377600703376), ('optimizer__weight_decay', 0.09066445302943106)])"

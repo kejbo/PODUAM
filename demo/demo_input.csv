@@ -1,0 +1,11 @@
+﻿ID,CAS,Chemical name,SMILES
+1,71-43-2,Benzene,C1=CC=CC=C1
+2,108-88-3,Toluene,CC1=CC=CC=C1
+3,108-95-2,Phenol,OC1=CC=CC=C1
+4,1912-24-9,Atrazine,CCNC1=NC(NC(C)C)=NC(Cl)=N1
+5,80-05-7,Bisphenol A,CC(C)(C1=CC=C(O)C=C1)C1=CC=C(O)C=C1
+6,2921-88-2,Chlorpyrifos,CCOP(=S)(OCC)OC1=NC(Cl)=C(Cl)C=C1Cl
+7,91-20-3,Naphthalene,C1=CC2=CC=CC=C2C=C1
+8,79-01-6,Trichloroethylene,ClC=C(Cl)Cl
+9,15307-86-5,Diclofenac,OC(=O)CC1=C(NC2=C(Cl)C=CC=C2Cl)C=CC=C1
+10,106-46-7,"1,4-Dichlorobenzene",ClC1=CC=C(Cl)C=C1

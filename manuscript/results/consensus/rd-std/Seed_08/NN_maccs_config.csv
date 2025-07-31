@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.6157768077284024,0.69677831431375,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.2825347126835888), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.019103782121224717)])"
+0.5559915146624348,0.6754838717243113,134,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.4716292421559054), ('optimizer__learning_rate', 0.009997068965005148), ('optimizer__weight_decay', 0.05101960377398209)])"
+0.5815726998449278,0.8337759472358208,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.3957345917311263), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.5771733066835565,0.6119089669346085,135,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.1769757728215305), ('optimizer__learning_rate', 0.009961710788875556), ('optimizer__weight_decay', 0.077423468485915)])"
+0.5495763702080032,0.6192562626256202,136,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.37333677768682433), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.023999357498191525)])"
+0.5356526175728841,0.640641447346249,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.3619599814093554), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.541096971900303,0.7885712891259291,136,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.38609149207921495), ('optimizer__learning_rate', 0.006452117269449346), ('optimizer__weight_decay', 0.09362135715834938)])"
+0.5834017357560589,0.5880375121380316,136,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.5907809538047252,0.6417029955144283,135,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.12269920802781868), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.00033982284001380443)])"
+0.5364173006454598,0.567722770284222,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.33364261646655213), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"

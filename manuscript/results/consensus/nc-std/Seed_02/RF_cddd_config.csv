@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.359872059854289,0.7744539071144594,512,"OrderedDict([('max_depth', 19), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.0010617415430960956), ('min_samples_leaf', 1), ('n_estimators', 587)])"
+0.3827304073480605,0.6998267524795908,512,"OrderedDict([('max_depth', 15), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 3), ('n_estimators', 1000)])"
+0.3592507705838121,0.8242237828899962,512,"OrderedDict([('max_depth', 15), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3634945478524728,0.6363917954042833,512,"OrderedDict([('max_depth', 15), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3598364163565208,0.7515961258592666,512,"OrderedDict([('max_depth', 16), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.3553600123450143,0.8003428498975373,512,"OrderedDict([('max_depth', 19), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 798)])"
+0.3574586088274078,0.8067930866304353,512,"OrderedDict([('max_depth', 16), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.38094689994075914,0.7956102254549035,512,"OrderedDict([('max_depth', 20), ('max_features', 0.59522838264122), ('max_samples', 0.9802014951268669), ('min_impurity_decrease', 0.0013719090705305045), ('min_samples_leaf', 1), ('n_estimators', 812)])"
+0.3665570433430807,0.8031322298755617,512,"OrderedDict([('max_depth', 13), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.35792342430581664,0.7210644680275365,512,"OrderedDict([('max_depth', 19), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"

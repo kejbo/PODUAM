@@ -1,0 +1,27 @@
+lightgbm==4.1.0
+matplotlib==3.7.0
+numpy==1.23.5
+openpyxl==3.1.1
+opentsne==1.0.2
+pandas==1.5.3
+pubchempy==1.0.4
+pynndescent==0.5.7
+rdkit==2022.9.5
+scikeras==0.11.0
+scikit-learn==1.2.1
+scikit-optimize
+scipy==1.10.1
+seaborn==0.13.0
+sklearn-quantile==0.0.29
+statsmodels==0.13.5
+tensorflow==2.13.0
+tensorflow-probability==0.21.0
+torch==2.0.0
+tqdm==4.65.0
+xgboost==2.0.0
+# for shiny app
+faicons==0.2.2
+shiny==1.2.1
+shinywidgets==0.5.1
+plotly==6.0.0
+fastparquet==2024.11.0

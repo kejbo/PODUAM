@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.41390983479896687,0.7004467348079786,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3989806987244154), ('optimizer__learning_rate', 0.004961795148749798), ('optimizer__weight_decay', 0.1)])"
+0.5164781058701937,0.7536244648862876,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.005932040076343883), ('optimizer__weight_decay', 0.1)])"
+0.5877740960879909,0.6549757270427913,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.000230348557638074)])"
+0.378643480804173,0.6220175304967063,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.37629308089129265), ('optimizer__learning_rate', 0.0038500607542099607), ('optimizer__weight_decay', 1e-05)])"
+0.3638028806497417,0.6678257965932145,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3951728373983248), ('optimizer__learning_rate', 0.006557232552065698), ('optimizer__weight_decay', 0.020530755940516836)])"
+0.33629111228921693,0.6601422235711114,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.17075345804184017), ('optimizer__learning_rate', 0.0031353553666969795), ('optimizer__weight_decay', 0.1)])"
+0.3554267232550627,0.83672354292754,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.2522418989329162), ('optimizer__learning_rate', 0.004552827408744715), ('optimizer__weight_decay', 0.1)])"
+0.37903180258791175,0.6652277597011789,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.1568144102314766), ('optimizer__learning_rate', 0.0031703773126609924), ('optimizer__weight_decay', 0.0006606784388429073)])"
+0.35477163287774616,0.6866186308661079,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.2979225229790009), ('optimizer__learning_rate', 0.0038068125560940624), ('optimizer__weight_decay', 0.0390308073910025)])"
+0.32962576994861864,0.6319497777728466,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.18484985289066144), ('optimizer__learning_rate', 0.0032750749647275854), ('optimizer__weight_decay', 1e-05)])"

@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.48855638561212433,0.6301413662624596,136,"OrderedDict([('max_depth', 16), ('max_features', 0.5), ('max_samples', 0.5), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.4558545715441567,0.6029749572219721,136,"OrderedDict([('max_depth', 20), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.4639642199210675,0.5780879560036518,136,"OrderedDict([('max_depth', 16), ('max_features', 0.5), ('max_samples', 0.865955417099715), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.4742823777501822,0.639883857547264,136,"OrderedDict([('max_depth', 12), ('max_features', 0.5), ('max_samples', 0.6377686805099035), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.4756650359693058,0.6277361256071623,136,"OrderedDict([('max_depth', 16), ('max_features', 0.5), ('max_samples', 0.6307991159563296), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.4597473587203752,0.6877229151812431,135,"OrderedDict([('max_depth', 17), ('max_features', 0.6770655209258933), ('max_samples', 0.72035218005923), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.45480635187535357,0.8206964879172468,136,"OrderedDict([('max_depth', 17), ('max_features', 0.5), ('max_samples', 1.0), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.4700014644399064,0.6235644967168145,136,"OrderedDict([('max_depth', 12), ('max_features', 0.5), ('max_samples', 0.7455194500467259), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.4883452578453393,0.6228848324257571,135,"OrderedDict([('max_depth', 17), ('max_features', 0.5), ('max_samples', 0.5), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"
+0.4653928147766004,0.6033330886543715,134,"OrderedDict([('max_depth', 19), ('max_features', 0.5), ('max_samples', 0.7013478290435894), ('min_impurity_decrease', 0.001), ('min_samples_leaf', 1), ('n_estimators', 1000)])"

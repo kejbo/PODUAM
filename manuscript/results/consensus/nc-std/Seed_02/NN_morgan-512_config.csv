@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.5345269901072899,0.8284156649756814,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.003608523794612677), ('optimizer__weight_decay', 1e-05)])"
+0.5801269258087651,0.7881152984606485,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.29910867351732395), ('optimizer__learning_rate', 0.0033678719566835346), ('optimizer__weight_decay', 0.09723717588581066)])"
+0.5335956787269638,0.740174251976347,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.3315442029511528), ('optimizer__learning_rate', 0.006229403887402522), ('optimizer__weight_decay', 0.1)])"
+0.6014261955518868,0.8743164285972067,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.0039000392370817645), ('optimizer__weight_decay', 1e-05)])"
+0.6363098217838874,0.856510736513053,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 1e-05)])"
+0.5273368092414352,0.8776403680190009,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.38987234732808673), ('optimizer__learning_rate', 0.003768090225405343), ('optimizer__weight_decay', 0.1)])"
+0.542022550772281,0.8966498743280378,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.37118455628494407), ('optimizer__learning_rate', 0.002213025256590149), ('optimizer__weight_decay', 1e-05)])"
+0.5655364950848335,0.8519567747006377,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.00414625231834259), ('optimizer__weight_decay', 1.9751237774162323e-05)])"
+0.5373405828684286,0.882824472249188,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.49678541980768814), ('optimizer__learning_rate', 0.008938453260755012), ('optimizer__weight_decay', 0.007470774763156615)])"
+0.5242758791090805,0.901765346489313,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.38919939065837567), ('optimizer__learning_rate', 0.004788250924564291), ('optimizer__weight_decay', 0.1)])"

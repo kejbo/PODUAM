@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.559037166429294,0.8248282047744049,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.0038355993037120883), ('optimizer__weight_decay', 0.1)])"
+0.5655859866697197,0.8178028472466666,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 1.7739892499574948e-05)])"
+0.5869346253978545,0.8171009531813216,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.004159323420368669), ('optimizer__weight_decay', 1e-05)])"
+0.6231388474741166,0.9429405063369177,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.4673838143604814), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.5808161256309072,0.827246723015497,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.375155846025853), ('optimizer__learning_rate', 0.0008219734383819002), ('optimizer__weight_decay', 0.1)])"
+0.5344688466530867,0.7919654580706381,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3488222882571691), ('optimizer__learning_rate', 0.0016544666412772052), ('optimizer__weight_decay', 0.025371042219424506)])"
+0.5597613590405655,0.7794397542946104,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3362482464362173), ('optimizer__learning_rate', 0.004435388455385378), ('optimizer__weight_decay', 5.280888678328681e-05)])"
+0.5815775117716754,0.9010390253120628,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.4986081123118376), ('optimizer__learning_rate', 0.0033749543801503434), ('optimizer__weight_decay', 1.0977310716857425e-05)])"
+0.5710296864626058,0.7901787540580208,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.0025644502585680895), ('optimizer__weight_decay', 1.7563011834539544e-05)])"
+0.5581239426218274,0.8792911639738731,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.003844644725179163), ('optimizer__weight_decay', 0.1)])"

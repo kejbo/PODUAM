@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.46747955292778504,0.7539065337739508,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.4894518292131808), ('optimizer__learning_rate', 0.0065595907886965375), ('optimizer__weight_decay', 0.0024967091718986313)])"
+0.4608942718181167,0.7350833244567043,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.002487168991540711), ('optimizer__weight_decay', 1e-05)])"
+0.4905765106931381,0.7875119335988143,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.00024025479279271867)])"
+0.4499880375937382,0.7856251891298712,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.4480863089293394), ('optimizer__learning_rate', 0.0038633503319773915), ('optimizer__weight_decay', 0.054167647179453694)])"
+0.46398242227422803,0.6794046130224126,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3410664382437058), ('optimizer__learning_rate', 0.004579473989478655), ('optimizer__weight_decay', 1e-05)])"
+0.49686362913822063,0.7363037254603454,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.49806271242943956), ('optimizer__learning_rate', 0.002318498269111366), ('optimizer__weight_decay', 1.087258206889512e-05)])"
+0.5407699796137648,0.8374761928052644,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.4894518292131808), ('optimizer__learning_rate', 0.0065595907886965375), ('optimizer__weight_decay', 0.0024967091718986313)])"
+0.4552041495359493,0.7238760540611039,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.46550909676751173,0.7045091158958117,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.44908614185957485), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.42098215950351686,0.7361063544153864,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 1e-05)])"

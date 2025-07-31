@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.375881383274837,0.6988810320527367,139,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.05644852723775969), ('max_depth', 8), ('min_child_weight', 0.0), ('n_estimators', 100), ('subsample', 1.0)])"
+0.31080046831482505,0.647479261781213,138,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.03), ('max_depth', 12), ('min_child_weight', 1.5889034536096391), ('n_estimators', 325), ('subsample', 1.0)])"
+0.396332382091188,0.6983672895908567,139,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.03), ('max_depth', 11), ('min_child_weight', 0.0), ('n_estimators', 100), ('subsample', 0.612554638881895)])"
+0.25821934108533,0.6383233264364445,137,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.03), ('max_depth', 20), ('min_child_weight', 0.0), ('n_estimators', 1000), ('subsample', 0.5)])"
+0.3047316409785444,0.6623212901302992,138,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.03), ('max_depth', 16), ('min_child_weight', 0.0), ('n_estimators', 182), ('subsample', 0.5)])"
+0.35955505398925675,0.7413214139967018,138,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.03), ('max_depth', 9), ('min_child_weight', 0.0), ('n_estimators', 183), ('subsample', 0.5681871466294778)])"
+0.34362990225797235,0.7367351529266594,138,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.03), ('max_depth', 9), ('min_child_weight', 0.0), ('n_estimators', 767), ('subsample', 1.0)])"
+0.3167979985283315,0.663159781175772,138,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.03), ('max_depth', 10), ('min_child_weight', 0.0), ('n_estimators', 285), ('subsample', 0.8657544484323196)])"
+0.2517719509347389,0.743025822271567,138,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.03565677020033113), ('max_depth', 18), ('min_child_weight', 0.0), ('n_estimators', 1000), ('subsample', 0.5)])"
+0.3292735601143452,0.6837315751724136,138,"OrderedDict([('colsample_bytree', 0.5), ('gamma', 0.1), ('learning_rate', 0.03), ('max_depth', 9), ('min_child_weight', 0.0), ('n_estimators', 308), ('subsample', 0.8713654042603564)])"

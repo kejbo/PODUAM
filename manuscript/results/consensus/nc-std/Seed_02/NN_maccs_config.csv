@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.6454229504464662,0.7722006398399026,139,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3785625517003515), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.6447411541330537,0.7517004242655796,138,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.5291465522783584,0.7218277353990364,139,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.34694830361144496), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.5907968723147986,0.697156468043365,137,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.6481381404921185,0.7960976897232175,138,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.34100231119193597), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.5383175462789268,0.7937273639612524,138,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.3350668947588257), ('optimizer__learning_rate', 0.00734257160016019), ('optimizer__weight_decay', 0.1)])"
+0.6900224370347484,0.8195151203156607,138,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.580106168971814,0.7383652706967938,138,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.00711221705107521), ('optimizer__weight_decay', 0.1)])"
+0.5708943058728719,0.7967098953816766,138,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.5509450029683185,0.8157373639775525,138,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.4294193431499779), ('optimizer__learning_rate', 0.00808999769545051), ('optimizer__weight_decay', 0.1)])"

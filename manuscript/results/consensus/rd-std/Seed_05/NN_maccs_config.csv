@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.5754552782518352,0.6425578595764033,136,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.3844626180402959), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.6179802823034092,0.6515870943439556,136,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.38072368009764934), ('optimizer__learning_rate', 0.009897969157280615), ('optimizer__weight_decay', 0.06851205774567176)])"
+0.6053391139462311,0.5991827716625306,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.3082717258193108), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.5773835620943507,0.6476990505434163,136,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"
+0.6058903767388073,0.6819535807606415,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.12785571167907345), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.04078311248569513)])"
+0.475687671266808,0.7125368988095769,135,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.17314778308176595), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 1e-05)])"
+0.5535070076264899,0.8296605289735611,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.16186815510830185), ('optimizer__learning_rate', 0.009800060414859596), ('optimizer__weight_decay', 0.06042483969984247)])"
+0.5317069917198303,0.6358265323836041,136,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.4354510257118378), ('optimizer__learning_rate', 0.007227603194902172), ('optimizer__weight_decay', 0.0885606033447972)])"
+0.5775977857519791,0.6962663148766662,135,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.02128387667459603), ('optimizer__learning_rate', 0.00937564164805429), ('optimizer__weight_decay', 0.0982887094952571)])"
+0.6093165356515461,0.6608807135202549,134,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.25523584454967335), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.1)])"

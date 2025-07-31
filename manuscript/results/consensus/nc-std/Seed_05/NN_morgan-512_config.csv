@@ -1,0 +1,11 @@
+RMSE (train),RMSE (test),p,best_params
+0.7634173965869268,0.9960923535891713,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.4787120804582954), ('optimizer__learning_rate', 0.005335280473769037), ('optimizer__weight_decay', 0.1)])"
+0.6205000442251436,0.7711186295952234,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.4308730418787036), ('optimizer__learning_rate', 0.003036483820107801), ('optimizer__weight_decay', 1e-05)])"
+0.6122540316473776,0.7944949922488741,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.00012785057826231414)])"
+0.5926989790301675,0.8889732257596034,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 0.00031061246081067563)])"
+0.5269473771403987,0.7452128577004926,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.18695620407095248), ('optimizer__learning_rate', 0.01), ('optimizer__weight_decay', 1e-05)])"
+0.5823200804722268,0.905774016968389,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.45655093563122995), ('optimizer__learning_rate', 0.004593534482108039), ('optimizer__weight_decay', 0.1)])"
+0.5484581548042877,0.9058737888823073,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.4716217574830635), ('optimizer__learning_rate', 0.005855345062940632), ('optimizer__weight_decay', 1e-05)])"
+0.5542354907155825,0.7541832782193089,512,"OrderedDict([('batch_size', 64), ('dropout_rate', 0.41030511352673354), ('optimizer__learning_rate', 0.0052174850483950996), ('optimizer__weight_decay', 0.0003729806998287082)])"
+0.5335019813578065,0.8949808894381404,512,"OrderedDict([('batch_size', 32), ('dropout_rate', 0.41434443961918893), ('optimizer__learning_rate', 0.003076335656362745), ('optimizer__weight_decay', 0.1)])"
+0.5619413417794488,0.876423500593796,512,"OrderedDict([('batch_size', 128), ('dropout_rate', 0.5), ('optimizer__learning_rate', 0.004707557025469528), ('optimizer__weight_decay', 0.1)])"
