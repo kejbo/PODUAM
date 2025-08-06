@@ -86,12 +86,14 @@ if __name__ == "__main__":
     for ax in [ax01, ax11, ax21, ax31, ax41]:
         ax.tick_params(labelleft=False)
         ax.set_ylabel('')
-    for n, ax in enumerate([ax00, ax10, ax20, ax30, ax40]):
-        ax.text(-0.15, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',
-                ha='right')
+    for n, ax in enumerate([ax00, ax01, ax10, ax11, ax20, ax21, ax30, ax31, ax40, ax41]):
+        if n%2==0:
+            ax.text(-0.15, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',ha='right')
+        else:
+            ax.text(-0.03, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='right')
     gs.tight_layout(fig)
     gs.update(left=0.1)
-    fig.savefig(fig_dir / fig_name, dpi=300)
+    fig.savefig(fig_dir / fig_name, dpi=600)
     plt.close()
 
 
@@ -111,5 +113,5 @@ if __name__ == "__main__":
     plot_ence(data_rd, batches, ax=ax00, fontsize=fontsize)
     plot_ence(data_nc, batches, ax=ax01, fontsize=fontsize)
 
-    fig.savefig(fig_dir / fig_name, dpi=300)
+    fig.savefig(fig_dir / fig_name, dpi=600)
     plt.close()

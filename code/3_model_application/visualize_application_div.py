@@ -61,9 +61,10 @@ plot_chemspace(df_rd, hue_col='uhat', clusters=clusters, CI=CI, legend=False, fo
 plot_chemspace(df_nc, hue_col='uhat', clusters=clusters, CI=CI, legend=True, fontsize=fontsize, ax=ax11)
 plot_annotated_clusters(clusters, ax=ax20, fontsize=fontsize)
 
-ax00.text(0.03, 1, letters[0], transform=ax00.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='left')
-ax10.text(0.03, 1, letters[1], transform=ax10.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='left')
-ax20.text(0.03, 0.9, letters[2], transform=ax20.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='left')
+for n, ax in enumerate([ax00, ax01, ax10, ax11]):
+    ax.text(0.03, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='right')
+
+ax20.text(0.03, 0.9, letters[n+1], transform=ax20.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='left')
 ax20.text(0.5, 0.9, 'selected chemical clusters', transform=ax20.transAxes, fontsize=fontsize + 2, fontweight='bold', va='top', ha='center')
 
 fig.savefig(fig_dir / fig3_name, dpi=600)
@@ -122,9 +123,11 @@ for ax in [ax20, ax21, ax30, ax31]:
 for ax in [ax01, ax21, ax31, ax41]:
     ax.tick_params(labelleft=False)
     ax.set_ylabel('')
-for n, ax in enumerate([ax00, ax20, ax30, ax40]):
-    ax.text(-0.11, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',
-            ha='right')
+for n, ax in enumerate([ax00, ax01, ax20, ax21, ax30, ax31, ax40, ax41]):
+    if n%2==0:
+        ax.text(-0.11, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',ha='right')
+    else:
+        ax.text(-0.01, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='right')
 
 fig4.savefig(fig_dir / fig4_name, dpi=600, transparent=True)
 plt.close()

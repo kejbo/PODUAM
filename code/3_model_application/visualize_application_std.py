@@ -91,9 +91,10 @@ plot_chemspace(df_rd, hue_col='uhat', clusters=clusters, CI=CI, legend=False, fo
 plot_chemspace(df_nc, hue_col='uhat', clusters=clusters, CI=CI, legend=True, fontsize=fontsize, ax=ax11)
 plot_annotated_clusters(clusters, ax=ax20, fontsize=fontsize)
 
-ax00.text(0.03, 1, letters[0], transform=ax00.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='left')
-ax10.text(0.03, 1, letters[1], transform=ax10.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='left')
-ax20.text(0.03, 0.9, letters[2], transform=ax20.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='left')
+for n, ax in enumerate([ax00, ax01, ax10, ax11]):
+    ax.text(0.03, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='right')
+
+ax20.text(0.03, 0.9, letters[n+1], transform=ax20.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='left')
 ax20.text(0.5, 0.9, 'selected chemical clusters', transform=ax20.transAxes, fontsize=fontsize + 2, fontweight='bold', va='top', ha='center')
 
 fig.savefig(fig_dir / fig3_name, dpi=600)
@@ -144,17 +145,21 @@ plot_group_ranking_violins(df_rd, y_col='uhat', y_label='uncertainty ({CI}% CI w
                            fontsize=fontsize, ax=ax40, hue='Superclass (top 15)', hue_order=hue_order, palette=palette)
 plot_group_ranking_violins(df_nc, y_col='uhat', y_label='uncertainty ({CI}% CI width)'.format(CI=CI),
                            fontsize=fontsize, ax=ax41, hue='Superclass (top 15)', hue_order=hue_order, palette=palette)
+
 ax00.set_title('reproductive/developmental', fontsize=fontsize + 2, fontweight='bold', pad=120)
 ax01.set_title('general non-cancer', fontsize=fontsize + 2, fontweight='bold', pad=120)
+
 for ax in [ax20, ax21, ax30, ax31]:
     ax.tick_params(labelbottom=False)
     ax.set_xlabel('')
 for ax in [ax01, ax21, ax31, ax41]:
     ax.tick_params(labelleft=False)
     ax.set_ylabel('')
-for n, ax in enumerate([ax00, ax20, ax30, ax40]):
-    ax.text(-0.11, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',
-            ha='right')
+for n, ax in enumerate([ax00, ax01, ax20, ax21, ax30, ax31, ax40, ax41]):
+    if n%2==0:
+        ax.text(-0.11, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',ha='right')
+    else:
+        ax.text(-0.01, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='right')
 
 fig4.savefig(fig_dir / fig4_name, dpi=600, transparent=True)
 plt.close()
@@ -206,7 +211,7 @@ cv_nc = pd.read_csv('../PODUAM/manuscript/results/crossvalidation/out_cv_cp-RF_9
 fig_name = 'SI_histogram_pod-U-dJ_final_model.png'
 
 fig = plt.figure(figsize=(16, 16))
-gs = gridspec.GridSpec(3, 2, left=0.1, right=0.95, top=0.95, bottom=0.05)
+gs = gridspec.GridSpec(3, 2, left=0.1, right=0.95, top=0.95, bottom=0.05, wspace=0.3)
 ax00 = fig.add_subplot(gs[0, 0])
 ax01 = fig.add_subplot(gs[0, 1])
 ax10 = fig.add_subplot(gs[1, 0])
@@ -229,8 +234,9 @@ plot_histogram_with_cumulative(cv_rd, df_rd, col_x='dJ', x_label='mean Jaccard d
 plot_histogram_with_cumulative(cv_nc, df_nc, col_x='dJ', x_label='mean Jaccard distance (5NN)',
                                sety=(False, True), fontsize=fontsize, ax=ax21)
 
-for n, ax in enumerate([ax00, ax10, ax20]):
-    ax.text(-0.11, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',
-            ha='right')
+
+for n, ax in enumerate([ax00, ax01, ax10, ax11, ax20, ax21]):
+    ax.text(-0.11, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',ha='right')
+
 fig.savefig(fig_dir / fig_name, dpi=600)
 plt.close()
