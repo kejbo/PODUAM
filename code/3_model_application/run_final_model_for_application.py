@@ -83,7 +83,6 @@ if __name__ == "__main__":
     dist, _ = knn.kneighbors(X=morgan_1024[morgan_1024.columns[-1024:]], n_neighbors=k_knn, return_distance=True)
     morgan_1024['dJ'] = dist.mean(axis=1)
 
-
     # Create final output file
     # - merge prediction results with Jaccard distances
     df_all = pd.merge(df.drop(columns=col_feat), morgan_1024[['INCHIKEY', 'dJ']], on='INCHIKEY')

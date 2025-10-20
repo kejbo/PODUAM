@@ -2,6 +2,7 @@
 
 """
 
+import io
 import os
 import glob
 import statsmodels.api as sm
@@ -13,10 +14,12 @@ import matplotlib.patches as patches
 import matplotlib.ticker as ticker
 from rdkit import Chem
 from rdkit.Chem import Draw
+from rdkit.Chem import rdDepictor
+from rdkit.Chem.Draw import rdMolDraw2D
+from PIL import Image
 from scipy.stats import pearsonr
 
 from modules.training import *
-
 
 # Figure 1,2
 def plot_prediction_performance(out, mg=True, lim=(-7.5, 4.5), internal=False, test_label='Test data (CV)', ax=None, fontsize=10):
@@ -61,12 +64,11 @@ def plot_prediction_performance(out, mg=True, lim=(-7.5, 4.5), internal=False, t
     mdae_cv = median_absolute_error(out[yhat], out[y])
     rmse_cv = root_mean_squared_error(out[yhat], out[y])
     r2_cv = r2_score(out[yhat], out[y])
-    #r2adj_cv = r2adj_score_cv(out, col_yhat=yhat, col_y=y)
 
     # - create scatterplot
     plt.axes(ax)
-    fig = sns.scatterplot(x=yhat, y=y, data=out, s=25, color='mediumblue', linewidth=0, alpha=0.3, legend=False, ax=ax)
-    sns.lineplot(x=[llim-1, ulim+1], y=[llim-1, ulim+1], color='black', alpha=0.5, linestyle=':')
+    sns.scatterplot(x=yhat, y=y, data=out, s=5, color='mediumblue', linewidth=0, alpha=0.3, legend=False, ax=ax)
+    sns.lineplot(x=[llim-1, ulim+1], y=[llim-1, ulim+1], color='black', alpha=0.5, linestyle=':', linewidth=0.6, ax=ax)
     plt.xlim([llim, ulim])
     plt.ylim([llim, ulim])
     plt.xlabel('predicted POD ' + unit, fontsize=fontsize)
@@ -81,15 +83,15 @@ def plot_prediction_performance(out, mg=True, lim=(-7.5, 4.5), internal=False, t
                #'R2adj: {5:.3f}\n'
                'n={5:,}'.format(test_label, rmse_cv, mae_cv, mdae_cv, r2_cv, #r2adj_cv, 
                                 len(out)), size=fontsize, color='mediumblue')
+
     if internal:
         yhat_in = 'yhat_in' + suffix
         mae_in = mean_absolute_error(out[yhat_in], out[y])
         mdae_in = median_absolute_error(out[yhat_in], out[y])
         rmse_in = root_mean_squared_error(out[yhat_in], out[y])
         r2_in = r2_score(out[yhat_in], out[y])
-        #r2adj_in = r2adj_score_cv(out, col_yhat=yhat_in, col_y=y)
 
-        sns.scatterplot(x=yhat_in, y=y, data=out, s=25, color='teal', linewidth=0, alpha=0.3, legend=False, ax=ax)
+        sns.scatterplot(x=yhat_in, y=y, data=out, s=5, color='teal', linewidth=0, alpha=0.3, legend=False, ax=ax)
         plt.text(x=llim + abs((ulim-llim) * 0.025), y=ulim - abs((ulim-llim) * 0.05),
                  ha='left', va='top', family='monospace',
                  s='Training data\n'
@@ -97,16 +99,19 @@ def plot_prediction_performance(out, mg=True, lim=(-7.5, 4.5), internal=False, t
                    'MAE:    {1:.3f}\n'
                    'MdAE:   {2:.3f}\n'
                    'R2:     {3:.3f}\n'
-                   #'R2adj:  {4:.3f}\n'
-                   'n={4:,}'.format(rmse_in, mae_in, mdae_in, r2_in, #r2adj_in, 
+                   'n={4:,}'.format(rmse_in, mae_in, mdae_in, r2_in,
                                     len(out)), size=fontsize, color='teal')
 
-    ax.grid(color='lightgrey', linestyle='-', linewidth=0.5)
+    plt.grid(color='lightgrey', linestyle='-', linewidth=0.2)
     ax.set_axisbelow(True)
-    plt.axes(ax)
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
+    
+    ax.tick_params(axis='both', labelsize=fontsize)
 
-    return fig
+    for spine in ax.spines.values():
+        spine.set_linewidth(0.3)
+
+    return ax
 
 
 def plot_histogram_uncertainty(out, ax, fontsize):
@@ -127,14 +132,14 @@ def plot_histogram_uncertainty(out, ax, fontsize):
     fig: matplotlib.axes.Axes
         The matplotlib axes containing the plot.
     """
-    #  - plot histogram
+    
     plt.axes(ax)
-    fig = sns.histplot(out['uhat'], color='mediumblue', alpha=0.5, edgecolor='white', kde=True, stat='percent', ax=ax)
+    fig = sns.histplot(out['uhat'], color='mediumblue', alpha=0.5, edgecolor='white', kde=True, stat='percent', line_kws={'linewidth': 0.5}, ax=ax)
     ax.set_ylabel('fraction of chemicals [%]', fontsize=fontsize)
     ax.set_xlabel('prediction uncertainty (95% CI width)', fontsize=fontsize)
-    plt.grid(color='lightgrey', linestyle='-', linewidth=0.5)
+    plt.grid(color='lightgrey', linestyle='-', linewidth=0.2)
     ax.set_axisbelow(True)
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig
 
@@ -169,8 +174,8 @@ def plot_calibration_confidence(coverage, pred_coverage, ax=None, fontsize=10):
     ulim = 1
 
     plt.axes(ax)
-    fig = sns.scatterplot(x=coverage, y=pred_coverage, s=50, color='mediumblue', linewidth=0, alpha=0.6, ax=ax)
-    sns.lineplot(x=[0, ulim], y=[0, ulim], color='black', alpha=0.5, linestyle=':')
+    fig = sns.scatterplot(x=coverage, y=pred_coverage, s=10, color='mediumblue', linewidth=0, alpha=0.6, ax=ax)
+    sns.lineplot(x=[0, ulim], y=[0, ulim], color='black', alpha=0.5, linestyle=':', linewidth=0.6)
     plt.xlim([0, ulim])
     plt.ylim([0, ulim])
     plt.xlabel('expected fraction inside CI')
@@ -180,9 +185,9 @@ def plot_calibration_confidence(coverage, pred_coverage, ax=None, fontsize=10):
              s='ECE:      {0:.3f}\n'
                'Pearson:  {1:.3f}\n'
                'Spearman: {2:.3f}'.format(ece, pearson, spearman), size=fontsize, color='mediumblue')
-    plt.grid(color='lightgrey', linestyle='-', linewidth=0.5)
+    plt.grid(color='lightgrey', linestyle='-', linewidth=0.2)
     ax.set_axisbelow(True)
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig
 
@@ -234,7 +239,6 @@ def plot_calibration_error(out, col_uhat='uhat_std', num_batches='entropy', equa
         num_batches = num_batches_equal
         idx_batches = [sorted_indices[(sorted_uhat >= i * equal_width) &
                                       (sorted_uhat < (i + 1) * equal_width)] for i in range(num_batches_equal)]
-
     
     # - calculate root mean squared error and root mean uncertainty per batch
     rmse_b = list()
@@ -263,8 +267,8 @@ def plot_calibration_error(out, col_uhat='uhat_std', num_batches='entropy', equa
     ulim = np.ceil(np.max([rmse_b, rmu_b]) / 0.5) * 0.5
 
     plt.axes(ax)
-    fig = sns.scatterplot(x=rmu_b, y=rmse_b, s=50, color='mediumblue', linewidth=0, alpha=0.6, ax=ax)
-    sns.lineplot(x=[0, 10], y=[0, 10], color='black', alpha=0.5, linestyle=':')
+    fig = sns.scatterplot(x=rmu_b, y=rmse_b, s=10, color='mediumblue', linewidth=0, alpha=0.6, ax=ax)
+    sns.lineplot(x=[0, 10], y=[0, 10], color='black', alpha=0.5, linestyle=':', linewidth=0.6, ax=ax)
     plt.xlim([0, ulim])
     plt.ylim([0, ulim])
     plt.xlabel('mean prediction uncertainty\n(RMU per batch)')
@@ -278,9 +282,9 @@ def plot_calibration_error(out, col_uhat='uhat_std', num_batches='entropy', equa
                'Spearman: {4:.3f}\n'
                'n={5:,}, batches={6:.0f}'.format(rmu_all, rmse_all, ence, pearson, spearman,
                                                    len(out), num_batches), size=fontsize, color='mediumblue')
-    plt.grid(color='lightgrey', linestyle='-', linewidth=0.5)
+    plt.grid(color='lightgrey', linestyle='-', linewidth=0.2)
     ax.set_axisbelow(True)
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig, ence, num_batches
 
@@ -358,7 +362,7 @@ def plot_calibration_distance(out, col_uhat='uhat_std', col_dJ='dJ', res=False, 
     ulimy = 1
 
     plt.axes(ax)
-    fig = sns.scatterplot(x=rmu_b, y=dJ_b, s=50, color='mediumblue', linewidth=0, alpha=0.6, ax=ax)
+    fig = sns.scatterplot(x=rmu_b, y=dJ_b, s=10, color='mediumblue', linewidth=0, alpha=0.6, ax=ax)
     plt.xlim([0, ulimx])
     plt.ylim([0, ulimy])
     if res:
@@ -374,11 +378,102 @@ def plot_calibration_distance(out, col_uhat='uhat_std', col_dJ='dJ', res=False, 
                'Spearman: {3:.3f}\n'
                'n={4:,}, batches={5:.0f}'.format(rmu_all, dJ_all, pearson, spearman, len(out), num_batches),
              size=fontsize, color='mediumblue')
-    plt.grid(color='lightgrey', linestyle='-', linewidth=0.5)
+    plt.grid(color='lightgrey', linestyle='-', linewidth=0.2)
     ax.set_axisbelow(True)
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig
+
+
+def plot_non_vs_standardized_violins(data, palette=('black', 'mediumblue'), ax=None, fontsize=10):
+    """ Creates a combined violin and box plot comparing the distribution of reported and predicted PODs
+    for the non-standardized and standardized subset of chemicals
+
+    Inputs
+    ----------
+    data : pandas dataframe, mandatory
+        The structured output from the crossvalidation including a 'subset' column
+    palette: tuple, default: ('black', 'mediumblue')
+        The color palette for the non-standardized and standardized subset
+    ax : matplotlib.axes.Axes, default:None
+        pre-existing axes for the plot
+    fontsize: int, default:10
+        fontsize for all axes and legends
+
+    Outputs
+    ----------  
+    ax: matplotlib.axes.Axes
+        The matplotlib axes containing the plot.
+    """
+
+    data_long = data.melt(id_vars=['ID', 'subset'], value_vars=['y_mg', 'yhat_mg'], var_name='POD', value_name='value')
+    data_long['POD'].replace(['y_mg', 'yhat_mg'], ['reported POD', 'predicted POD'], inplace=True)
+
+    order = ['standardized', 'non-standardized']
+    hue_order = ['reported POD', 'predicted POD']
+
+    sns.violinplot(data=data_long, x='subset', y='value', hue='POD', order=order, hue_order=hue_order, 
+                palette=palette, alpha=0.6, 
+                width=0.9, linewidth=0, 
+                inner=None, ax=ax)
+    sns.move_legend(ax, "upper right")
+    ax.legend().set_title('')
+    sns.boxplot(data=data_long,  x='subset', y='value', hue='POD', order=order, hue_order=hue_order, legend=False,
+                palette='dark:black', width=0.9, fill=False, linewidth=0.5, fliersize=0.5, whis=[2.5, 97.5], dodge=True, gap=0.7, ax=ax)
+
+    plt.ylim([-7, 6])
+    plt.ylabel('POD [log(mg/kg-d)]', fontdict={'fontsize': fontsize})
+
+    ax.text(x=0.25, y=0.02, ha='center', va='bottom', family='monospace', transform=ax.transAxes,
+            s='n={0:,}'.format(sum(data_long['subset'] == order[0])), size=fontsize, color='black')
+    ax.text(x=0.75, y=0.02, ha='center', va='bottom', family='monospace', transform=ax.transAxes,
+            s='n={0:,}'.format(sum(data_long['subset'] == order[1])), size=fontsize, color='black')
+
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
+
+    return ax
+
+
+def plot_non_vs_standardized_rmse(data, groupby='subset', ax=None, palette=('black', 'mediumblue'), fontsize=10):
+        """ Create a bar plot comparing RMU and RMSE for standardized and non-standardized sets or subsets
+
+        Inputs
+        ----------
+        data : pandas dataframe, mandatory
+            The structured output from the crossvalidation including a 'subset' column
+        groupby: str, default: 'subset'
+            The column name to group by ('subset' for expanded training set or 'set' for external test)
+        palette: tuple, default: ('black', 'mediumblue')
+            The color palette for the non-standardized and standardized subset
+        ax : matplotlib.axes.Axes, default:None
+            pre-existing axes for the plot
+        fontsize: int, default:10
+            fontsize for all axes and legends   
+        
+        Outputs
+        ----------
+        ax: matplotlib.axes.Axes
+            The matplotlib axes containing the plot.
+        """
+
+        data_agg = data.groupby(groupby).agg(RMU=('uhat_std', lambda x: np.sqrt(np.mean(x**2))),
+                                            RMSE=('res', lambda x: np.sqrt(np.mean(x**2)))).reset_index().melt(
+                                        id_vars=groupby, value_vars=['RMU', 'RMSE'], var_name='variability', value_name='value')
+
+        data_agg.replace(['RMU', 'RMSE'], ['prediction uncertainty (RMU)', 'observed prediction error (RMSE)'], inplace=True)
+        order = ['standardized', 'non-standardized'] if groupby=='subset' else ['standardized (cv)', 'non-standardized (ext)']
+        hue_order = ['observed prediction error (RMSE)', 'prediction uncertainty (RMU)']
+        data_agg = data_agg[data_agg[groupby].isin(order)]
+
+        plt.axes(ax)
+        sns.barplot(data=data_agg, x=groupby, y='value', hue='variability', order=order, hue_order=hue_order, palette=palette, 
+                    alpha=0.6, gap=0.1, ax=ax)
+        plt.ylim([0, 1.3])
+        plt.ylabel('mean variability [log(mg/kg-d)]')
+        sns.move_legend(ax, "upper right")
+        ax.legend().set_title('')
+
+        return ax
 
 
 # Figure 3
@@ -437,7 +532,7 @@ def plot_chemspace(out, hue_col='', CI=False, add_pie=True, legend=True, annotat
     # - create chemical space plot
     plt.axes(ax)
     fig = sns.scatterplot(data=out, x='TSNE1', y='TSNE2', hue=hue_bins, palette=palette,
-                          s=5, alpha=0.3, linewidth=0, legend=legend, ax=ax)
+                          s=1, alpha=0.3, linewidth=0, legend=legend, ax=ax)
     ax.axis('off')
 
 
@@ -463,8 +558,8 @@ def plot_chemspace(out, hue_col='', CI=False, add_pie=True, legend=True, annotat
 
         freq_data = hue_bins.value_counts().sort_index(ascending=ascending)
         ax_pie = inset_axes(ax,
-                            width=1.7,
-                            height=1.7,
+                            width=1.7/2.54,
+                            height=1.7/2.54,
                             bbox_transform=ax.transAxes,
                             bbox_to_anchor=(0.87, 0.3),
                             loc='upper left')
@@ -482,9 +577,9 @@ def plot_chemspace(out, hue_col='', CI=False, add_pie=True, legend=True, annotat
             xd, yd = clusters['width'][cnum], clusters['height'][cnum]
             angle = clusters['angle'][cnum]
 
-            ellipse = Ellipse(xy=(xm, ym), width=xd, height=yd, angle=angle, edgecolor='black', fc='None', lw=1.5)
+            ellipse = Ellipse(xy=(xm, ym), width=xd, height=yd, angle=angle, edgecolor='black', fc='None', lw=0.8)
             ax.add_patch(ellipse)
-            ax.text(xm + np.sign(angle)*(xd/4), ym - yd / 2 - 2, prefix + str(cnum + 1), fontsize=fontsize + 2, fontweight='bold',
+            ax.text(xm + np.sign(angle)*(xd/4), ym - yd / 2 - 2, prefix + str(cnum + 1), fontsize=fontsize, #fontweight='bold',
                     ha='center', va='top')
     return fig
 
@@ -506,6 +601,74 @@ def append_values_to_keys(dictionary, key_value_pairs):
             dictionary[key].append(value)
         else:
             dictionary[key] = [value]
+
+
+def draw_mol_svg(mol, filename, width=240, height=150, bond_len=30):
+    """ Draws a molecule with customized appearance settings to save it to an SVG file 
+    and returns PNG bytes for in-matplotlib plotting
+
+    Inputs
+    ----------
+    mol : rdkit.Chem.Mol, mandatory
+        The RDKit molecule to be drawn
+    filename: str, mandatory
+        The output filename for the SVG file
+    width: int, default: 240
+        The width of the SVG image in pixels
+    height: int, default: 150
+        The height of the SVG image in pixels
+    bond_len: int, default: 30
+        The fixed bond length in the drawing
+
+    Outputs
+    ----------
+    image: PIL.Image
+        The PIL Image object containing the PNG image of the molecule
+    """
+
+    drawer = rdMolDraw2D.MolDraw2DSVG(width, height)
+    opts = drawer.drawOptions()
+    
+    # --- Appearance settings ---
+    opts.fixedBondLength = bond_len 
+    opts.bondLineWidth = 1.5 
+    opts.addAtomIndices = False  
+    opts.addStereoAnnotation = False
+    opts.fixedFontSize = 6
+    opts.minFontSize = 6
+    opts.useBWAtomPalette()
+    opts.atomLabelFontFace = "Helvetica"
+    opts.padding = 0.05
+    opts.dotsPerAngstrom = 100
+
+    # -- save to SVG ---
+    rdMolDraw2D.PrepareAndDrawMolecule(drawer, mol)
+    drawer.FinishDrawing()
+    
+    with open(filename, "w") as f:
+        f.write(drawer.GetDrawingText())
+
+    # Get PNG bytes and load to Image
+    drawer_png = rdMolDraw2D.MolDraw2DCairo(width, height)
+    opts_png = drawer_png.drawOptions()
+    opts_png.fixedBondLength = bond_len 
+    opts_png.bondLineWidth = 1.5 
+    opts_png.addAtomIndices = False  
+    opts_png.addStereoAnnotation = False
+    opts_png.fixedFontSize = 6
+    opts_png.minFontSize = 6
+    opts_png.useBWAtomPalette()
+    opts_png.atomLabelFontFace = "Helvetica"
+    opts_png.padding = 0.05
+    opts_png.dotsPerAngstrom = 100
+
+    rdMolDraw2D.PrepareAndDrawMolecule(drawer_png, mol)
+    drawer_png.FinishDrawing()
+
+    png_bytes = drawer_png.GetDrawingText()
+    image = Image.open(io.BytesIO(png_bytes))
+
+    return image
 
 
 def plot_annotated_clusters(clusters, ax, num_per_row=5, prefix='', fontsize=10):
@@ -530,16 +693,19 @@ def plot_annotated_clusters(clusters, ax, num_per_row=5, prefix='', fontsize=10)
     row_count = 0
     for cnum in np.arange(len(clusters['group_name'])):
         m = Chem.MolFromSmiles(clusters['smiles'][cnum])
-        Chem.rdCoordGen.AddCoords(m)
-        im_arr = Draw.MolToImage(m, size=(300, 300), fitImage=True)
 
-        pad = 1.05/num_per_row-0.1
-        ax_cluster = inset_axes(ax, width=0.8, height=0.8, bbox_transform=ax.transAxes,
-                            bbox_to_anchor=(pad + (pad+0.1) * (cnum % num_per_row), 0.7 - 0.38 * row_count), loc='upper left')
+        rdDepictor.SetPreferCoordGen(True)
+        Chem.rdCoordGen.AddCoords(m)
+
+        im_arr = draw_mol_svg(m, "manuscript/figures/structures/" + str(cnum) + "_" + str(clusters['chem_name'][cnum]) + ".svg")
+
+        pad = 0.5/num_per_row-0.05
+        ax_cluster = inset_axes(ax, width=0.8, height=0.5, bbox_transform=ax.transAxes,
+                            bbox_to_anchor=(pad + (pad+0.15) * (cnum % num_per_row), 0.85 - 0.43 * row_count), loc='upper left')
         ax_cluster.imshow(im_arr)
-        ax_cluster.text(-0.2, 1.3, prefix + str(cnum + 1), ha='right', va='top', fontsize=fontsize+2,
-                    fontweight='bold', transform=ax_cluster.transAxes)
-        ax_cluster.text(0, 1, clusters['group_name'][cnum],
+        ax_cluster.text(-0.1, 1.2, prefix + str(cnum + 1), ha='right', va='bottom', fontsize=fontsize,
+                        transform=ax_cluster.transAxes)
+        ax_cluster.text(0, 1.01, clusters['group_name'][cnum],
                     ha='left', va='bottom', fontsize=fontsize, transform=ax_cluster.transAxes)
         ax_cluster.axis('off')
 
@@ -589,7 +755,7 @@ def plot_group_ranking_scatter(out, groupby='my_class', col_uhat='uhat_std', CI=
     ymin, ymax = 0, 10
     
     plt.axes(ax)
-    fig = sns.scatterplot(out_grouped, x='yhat_mg', y=col_uhat, s=20, linewidth=0.1, alpha=0.7, ax=ax, legend=legend,
+    fig = sns.scatterplot(out_grouped, x='yhat_mg', y=col_uhat, s=5, linewidth=0.1, alpha=0.7, ax=ax, legend=legend,
                           **kwargs)
     ax.set_xlabel('POD [log(mg/kg-d)]')
     ax.set_ylabel('uncertainty ({utype})'.format(utype='std dev' if not CI else '{CI}% CI width'.format(CI=CI)))
@@ -597,9 +763,7 @@ def plot_group_ranking_scatter(out, groupby='my_class', col_uhat='uhat_std', CI=
     ax.set_ylim(ymin, ymax)
 
     if legend:
-        leg = ax.legend(ncol=4, loc="lower left", bbox_to_anchor=(-0.05, 1.05), title='Superclass (top 15)')
-        for lh in leg.legendHandles:
-            lh.set_alpha(1)
+        ax.legend(ncol=3, loc="lower center", bbox_to_anchor=(0.95, 1.07), title='Superclass (top 15)', markerscale=2)
     
     # - plot background gradient
     if gradient==True:
@@ -616,11 +780,11 @@ def plot_group_ranking_scatter(out, groupby='my_class', col_uhat='uhat_std', CI=
         data_agg_top = data_agg[data_agg['count'] >= min_chem]['median'].sort_values()[:highlight_top]
 
         zoom_xlim = (out_grouped['yhat_mg'].min()-0.1, data_agg_top.iloc[highlight_top-1])
-        ax.axvline(zoom_xlim[0], color='black', linestyle='--', linewidth=2)
-        ax.axvline(zoom_xlim[1], color='black', linestyle='--', linewidth=2)
+        ax.axvline(zoom_xlim[0], color='black', linestyle='--', linewidth=1)
+        ax.axvline(zoom_xlim[1], color='black', linestyle='--', linewidth=1)
         ax.fill_betweenx(ax.get_ylim(), zoom_xlim[0], zoom_xlim[1], color='grey', alpha=0.1)
 
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig
 
@@ -654,27 +818,25 @@ def plot_group_counts(data, agg_col='yhat_mg', groupby='my_class', highlight_top
 
     #  - group chemicals
     data_agg = data.groupby(['Superclass (top 15)', groupby])['yhat_mg'].agg(['count', 'median']).sort_values(by='median')
-    data_agg_top = data_agg[data_agg['count'] >= min_chem].sort_values(by='median')[:highlight_top].reset_index()
+    data_agg_top = data_agg[data_agg['count'] >= min_chem].sort_values(by='median').iloc[:highlight_top, :].reset_index()
     
     #  - plot barplot
     plt.axes(ax)
-    fig = sns.barplot(x=groupby, y='count', data=data_agg_top, legend=False, color='black', alpha=0.5, width=0.5, ax=ax,
-                      **kwargs)
-  
-    ax.grid(axis='y', which='both', color='lightgrey', linestyle='-', linewidth=0.5)
+    fig = sns.barplot(data=data_agg_top, x=groupby, y='count', legend=False, alpha=0.7, width=0.5, ax=ax, **kwargs)
+    
+    ax.grid(axis='y', which='both', color='lightgrey', linestyle='-', linewidth=0.2)
 
-    ax.yaxis.set_major_locator(ticker.MultipleLocator(500))
-    ax.yaxis.set_minor_locator(ticker.MultipleLocator(250))
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(100))
 
     ax.set_axisbelow(True)
     ax.tick_params('x', labelrotation=90)
     ax.set_ylabel('nr of chemicals')
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig
 
 
-def plot_group_ranking_violins(data, y_col='yhat_mg', y_label='POD [log(mg/kg-d)]',groupby='my_class', highlight_top=50, 
+def plot_group_ranking_violins(data, y_col='yhat_mg', y_label='POD [log(mg/kg-d)]', groupby='my_class', highlight_top=50, 
                                min_chem=30, invert_y=False, fontsize=10, ax=None, **kwargs):
 
     """ Creates a combined violin and boxplot chemical distribution per chemical class for the most toxic chemical classes
@@ -708,25 +870,26 @@ def plot_group_ranking_violins(data, y_col='yhat_mg', y_label='POD [log(mg/kg-d)
     data_agg = data.groupby(groupby)['yhat_mg'].agg(['count', 'median', 'min', 'max', 'std']).sort_values(by='median')
     top_list = list(data_agg[data_agg['count'] >= min_chem]['median'].sort_values()[:highlight_top].index)
     data['my_class_top'] = data['my_class'].where(data['my_class'].isin(top_list), other=np.nan)
-
+    
     #  - plot violin and barplots
     plt.axes(ax)
     fig = sns.violinplot(data=data, x='my_class_top', y=y_col, order=top_list, legend=False,
-                         alpha=0.5, width=0.9, linewidth=0, color='mediumblue', density_norm='width', ax=ax,
+                         alpha=0.7, width=0.9, linewidth=0, color='mediumblue', density_norm='width', ax=ax,
                          **kwargs)
     sns.boxplot(data=data, x='my_class_top', y=y_col, order=top_list, legend=False,
                 color='black', width=0.6, fill=False, linewidth=0.5, fliersize=1, whis=[2.5, 97.5], ax=ax)
+
     ax.tick_params('x', labelrotation=90)
     ax.set_xlabel('')
     ax.set_ylabel(y_label)
 
-    ax.grid(axis='y', color='lightgrey', linestyle='-', linewidth=0.5)
+    ax.grid(axis='y', color='lightgrey', linestyle='-', linewidth=0.2)
     ax.set_axisbelow(True)
 
     if invert_y:
         ax.invert_yaxis()
 
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig
 
@@ -821,7 +984,7 @@ def plot_histogram_pod(data, col_x='POD', xlabel='reported POD [log(mg/kg-d)]', 
         ax.fill_betweenx((0, 2000), zoom_xlim[0], zoom_xlim[1], color='red', alpha=0.1)
         ax.set_ylim(old_lim)
 
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig
 
@@ -886,13 +1049,13 @@ def plot_ence(out, batches, ax=None, fontsize=10):
 
     # - create scatterplot
     plt.axes(ax)
-    fig = sns.scatterplot(x=n_sqrt, y=ence_all, s=40, color='mediumblue', linewidth=0, alpha=0.6, ax=ax)
+    fig = sns.scatterplot(x=n_sqrt, y=ence_all, s=10, color='mediumblue', linewidth=0, alpha=0.6, ax=ax)
     ax.set_ylim([0, 0.5])
     ax.set_xlabel('sqrt of number of batches')
     ax.set_ylabel('ENCE')
-    plt.grid(color='lightgrey', linestyle='-', linewidth=0.5)
+    plt.grid(color='lightgrey', linestyle='-', linewidth=0.2)
     ax.set_axisbelow(True)
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig
 
@@ -947,11 +1110,11 @@ def plot_histogram_with_cumulative(out_cv, out_app, col_x, x_label='x', sety=(Tr
     ax.text(x=x_pos, y=0.95, ha=text_pos, va='top', family='monospace', transform=ax.transAxes,
             s='{0}\n'
               'mean: {1:.3f}\n'
-              'n:    {2:d}'.format(set_label[0], out_cv[col_x].mean(), len(out_cv)), size=fontsize, color=colors[0])
-    ax.text(x=x_pos, y=0.75, ha=text_pos, va='top', family='monospace', transform=ax.transAxes,
+              'n={2:,}'.format(set_label[0], out_cv[col_x].mean(), len(out_cv)), size=fontsize, color=colors[0])
+    ax.text(x=x_pos, y=0.70, ha=text_pos, va='top', family='monospace', transform=ax.transAxes,
             s='{0}\n'
               'mean: {1:.3f}\n'
-              'n:    {2:d}'.format(set_label[1], out_app[col_x].mean(), len(out_app)), size=fontsize, color=colors[1])
+              'n={2:,}'.format(set_label[1], out_app[col_x].mean(), len(out_app)), size=fontsize, color=colors[1])
 
     # - calculate the cumulative percentage
     n_cv, bins_cv, patches_cv = ax.hist(out_cv[col_x], bins=30, color='black', alpha=0.0)  # Get bins
@@ -962,18 +1125,18 @@ def plot_histogram_with_cumulative(out_cv, out_app, col_x, x_label='x', sety=(Tr
 
     # - plot cumulative distribution on second y-axis
     ax2 = ax.twinx()
-    ax2.plot(bins_cv[:-1], cdf_cv, color=colors[0], linewidth=2)
-    ax2.plot(bins_app[:-1], cdf_app, color=colors[1], linewidth=2)
+    ax2.plot(bins_cv[:-1], cdf_cv, color=colors[0], linewidth=1)
+    ax2.plot(bins_app[:-1], cdf_app, color=colors[1], linewidth=1)
     if sety[1]:
         ax2.set_ylabel('Cumulative fraction [%]')
     else:
         ax2.set_ylabel('')
     ax2.set_ylim(0, 100)  # Ensure the y-axis is from 0 to 100 percent
 
-    ax.grid(axis='y', color='lightgrey', linestyle='-', linewidth=0.5)
+    ax.grid(axis='y', color='lightgrey', linestyle='-', linewidth=0.2)
     ax.set_axisbelow(True)
 
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return ax
 
@@ -1075,13 +1238,13 @@ def plot_correlation_scatter(x, y, lim=(-4,4), **kwargs):
         The axes containing the scatter plot.
     """
     ax = plt.gca()
-    ax.scatter(x, y, color='mediumblue', alpha=0.6, s=5)
+    ax.scatter(x, y, color='mediumblue', alpha=0.6, s=2)
     min_val = lim[0]
     max_val = lim[1]
     ax.plot([min_val, max_val], [min_val, max_val], color='gray', linestyle='--', linewidth=1)
     ax.set_xlim(min_val, max_val)
     ax.set_ylim(min_val, max_val)
-    ax.grid(True, linestyle=':', linewidth=0.5, alpha=0.6)
+    ax.grid(True, linestyle=':', linewidth=0.2, alpha=0.6)
 
 
 def plot_correlation_scatter_pairgrid(matrix, title, lim=(-4,4)):
@@ -1141,9 +1304,9 @@ def plot_uncertainty_variability_correlation(data, ax=None, fontsize=10):
     sns.regplot(x='prediction_ci', y='uncertainty_mean', data=data, scatter_kws={'alpha':0.6, 's':5, 'color':'mediumblue'}, ax=ax)
     ax.set_xlabel('Variability (95% CI width) across median predictions')
     ax.set_ylabel('Mean prediction uncertainty (95% CI width)')
-    ax.text(0.95, 0.05, f'$Pearson^2$ = {r2_var:.2f}', ha='right', va='bottom',transform=ax.transAxes, color='mediumblue', fontsize=12)
+    ax.text(0.95, 0.05, f'Pearson² = {r2_var:.2f}', ha='right', va='bottom', transform=ax.transAxes, color='mediumblue', fontsize=12)
 
-    ax.grid(color='lightgrey', linestyle='-', linewidth=0.5)
+    ax.grid(color='lightgrey', linestyle='-', linewidth=0.2)
     ax.set_axisbelow(True)
     plt.rcParams.update({'font.size': fontsize})
 
@@ -1250,29 +1413,26 @@ def nested_cv_performance_comparison(df_metrics_fold, metric, bench, limits, ax=
 
     llim, ulim = limits
 
-    #fig, ax = plt.subplots(figsize=(15, 8))
-    #plt.subplots_adjust(bottom=0.3)
-
     plt.axes(ax)
     fig = sns.violinplot(x='Features', y=metric, hue='Algorithm', data=df_metrics_fold[df_metrics_fold['Algorithm']!='consensus'],
                        order=order, hue_order=hue_order, palette=palette, alpha=0.2,
                        width=0.9, dodge='auto', fill=True, linewidth=0, inner=None, legend=False, ax=ax)
     sns.boxplot(x='Features', y=metric, hue='Algorithm', data=df_metrics_fold[df_metrics_fold['Algorithm']!='consensus'],
                     order=order, hue_order=hue_order, palette=palette,
-                    width=0.9, gap=0.4, dodge='auto', fill=False, linewidth=1.5, fliersize=1, whis=[2.5, 97.5], ax=ax)
+                    width=0.9, gap=0.4, dodge='auto', fill=False, linewidth=1, fliersize=1, whis=[2.5, 97.5], ax=ax)
     sns.violinplot(x='Features', y=metric, hue='Algorithm',
                    data=df_metrics_fold[df_metrics_fold['Algorithm'] == 'consensus'],
                    palette='gray', alpha=0.2, width=0.3, dodge=False, fill=True, linewidth=0, inner=None, legend=False, ax=ax)
     sns.boxplot(x='Features', y=metric, hue='Algorithm',
                 data=df_metrics_fold[df_metrics_fold['Algorithm'] == 'consensus'],
-                palette='gray', width=0.3, gap=0.2, dodge=False, fill=False, linewidth=1.5, fliersize=1, whis=[2.5, 97.5], ax=ax)
+                palette='gray', width=0.3, gap=0.2, dodge=False, fill=False, linewidth=1, fliersize=1, whis=[2.5, 97.5], ax=ax)
     ax.axhline(y=bench, linestyle='--', color='gray', linewidth=1)
     sns.move_legend(fig, "upper left", bbox_to_anchor=(1, 1.01))
     plt.xlabel("")
     plt.ylabel(metric)
     plt.ylim([llim, ulim])
     plt.tight_layout()
-    plt.rcParams.update({'font.size': fontsize})
+    plt.rcParams.update({'font.size': fontsize, 'axes.linewidth': 0.3})
 
     return fig
 
@@ -1298,12 +1458,11 @@ def plot_rmse_nn_architecture(data, x='layers', xlabel='Nr of hidden layers', ax
        
     palette = {'train': 'teal', 'test': 'mediumblue'}
 
-    # plt.axes(ax)
-
-    sns.violinplot(x=x, y='RMSE', hue='set', data=data, #order=order, hue_order=hue_order, 
+    plt.axes(ax)
+    sns.violinplot(x=x, y='RMSE', hue='set', data=data,
                        palette=palette, alpha=0.5, width=0.9, dodge=True, fill=True, linewidth=0, inner=None, legend=legend, ax=ax)
     
-    sns.boxplot(x=x, y='RMSE', hue='set', data=data, #order=order, hue_order=hue_order, 
+    sns.boxplot(x=x, y='RMSE', hue='set', data=data,
                 palette=palette, width=0.9, gap=0.4, dodge=True, fill=False, linewidth=1.5, fliersize=1, whis=[2.5, 97.5], legend=False, ax=ax)
 
     ax.set_xlabel(xlabel)
@@ -1317,68 +1476,3 @@ def plot_rmse_nn_architecture(data, x='layers', xlabel='Nr of hidden layers', ax
     plt.rcParams.update({'font.size': fontsize})
 
     return ax
-
-
-def plot_chemical_space_classes(df):
-    """ Creates the two-dimensional t-SNE embedding of the marketed chemicals colored by ClassyFire Superclasses 
-    (Djoumbou et al., 2016) following von Borries et al. (2023).
-
-    Inputs
-    ----------
-    data : pandas dataframe, mandatory
-        Structured dataframe from visualize_chem-space.py containing t-SNE coordinates and ClassyFire Classification 
-        for the large set of >130,000 marketed chemicals
-
-    Outputs
-    ----------
-    ax: matplotlib.axes.Axes
-        The matplotlib axes containing the plot.
-    """
-    
-    top15 = df.groupby('Superclass').count()['TSNE1'].sort_values(ascending=False).index[:15]
-    df['Superclass_top15'] = df['Superclass'].where(df['Superclass'].isin(top15), 'Other')
-
-    # Plot figure
-    c = 'Superclass_top15'
-
-    palette = ['darkslategrey', 'teal', 'aquamarine', 'darkred', 'orangered', 'mediumpurple', 'darkorchid',
-            'mediumblue', 'royalblue', 'skyblue', 'darkgoldenrod', 'darkorange', 'gold',  'lightpink', 'hotpink',
-            'lightgrey']
-
-    order = top15.sort_values().to_list() + ['Other']
-
-    fig, ax = plt.subplots(figsize=(18, 10))
-    plt.subplots_adjust(left=0.1, right=0.65)
-    sns.scatterplot(df, x='TSNE1', y='TSNE2', hue=c, hue_order=order, palette=palette, edgecolor=None, alpha=1, s=2, legend=None)
-    
-    ax.axis('off')
-
-    # custom legend
-    occurrence = df[c].value_counts(normalize=True)
-    ax1 = inset_axes(ax,
-                    width=1,  # inch
-                    height=9,  # inch
-                    bbox_transform=ax.transAxes,  # relative axes coordinates
-                    bbox_to_anchor=(1.25, 1.1),  # relative axes coordinates
-                    loc=2)  # loc=lower left corner
-
-    width, height, pad = 0.5, 20, 0.25
-    y = 0
-    ax1.axis('off')
-
-    for n, s in enumerate(order[::-1]):
-        h = max(height * occurrence[s], 0.1)
-        ax1.add_patch(patches.Rectangle((0, y), width, h, facecolor=palette[::-1][n]))
-        ax1.text(-0.5, y + h / 2 - 0.1, "{:.1%}".format(occurrence[s]),
-                fontdict={'size': 10})
-        ax1.text(width + 0.1, y + h / 2 - 0.1, s,
-                fontdict={'size': 10})
-        y = y + h + pad
-
-    ax1.text(-0.5, y + h / 2 + 0.1, "$\\bf{Total\ number\ of\ chemicals}$: " + str(df.shape[0]),
-                fontdict={'size': 10})
-
-    plt.xlim([0, 1])
-    plt.ylim([0, y])
-
-    return fig

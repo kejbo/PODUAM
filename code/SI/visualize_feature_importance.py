@@ -25,16 +25,17 @@ importance_nc, sorted_features_nc = collect_feature_importance(model_nc, rdkit_d
 importance_long_rd = importance_rd.melt(var_name='feature', value_name='importance')
 importance_long_nc = importance_nc.melt(var_name='feature', value_name='importance')
 
+importance_long_rd.to_csv('../PODUAM/manuscript/results/application/final_models_feature-importance_rd.csv', index=False)
+importance_long_nc.to_csv('../PODUAM/manuscript/results/application/final_models_feature-importance_nc.csv', index=False)
+
 # Visualisation
-fontsize = 12
+fontsize = 16
 letters = 'abcdefghijklmnopqrstuvwxyz'
 fig_dir = Path('../PODUAM/manuscript/figures/')
 
 # - feature importance
-
-
 fig_name = 'SI_final_models_feature-importance.png'
-fig = plt.figure(figsize=(16, 14))
+fig = plt.figure(figsize=(16, 18))
 gs = gridspec.GridSpec(1, 2, width_ratios=[1, 1], wspace=0.5)
 
 ax00 = fig.add_subplot(gs[0, 0])
@@ -42,6 +43,6 @@ ax01 = fig.add_subplot(gs[0, 1])
 
 plot_feature_importance(importance_long_rd, sorted_features_rd, ax=ax00, top_n=50, title="Top 50 features by mean importance")
 plot_feature_importance(importance_long_nc, sorted_features_nc, ax=ax01, top_n=50, title="Top 50 features by mean importance")
-ax00.set_title('reproductive/developmental toxicity', fontsize=fontsize + 2, fontweight='bold', pad=30)
-ax01.set_title('general non-cancer toxicity', fontsize=fontsize + 2, fontweight='bold', pad=30)
+ax00.set_title('reproductive/developmental toxicity', fontsize=fontsize + 1, fontweight='bold', pad=30)
+ax01.set_title('general non-cancer toxicity', fontsize=fontsize + 1, fontweight='bold', pad=30)
 fig.savefig(fig_dir / fig_name, dpi=600)

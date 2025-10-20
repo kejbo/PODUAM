@@ -41,16 +41,16 @@ if __name__ == "__main__":
         alg=alg, effect='nc-std', feat=feat))
 
     # Visualization
-    fontsize = 14
+    fontsize = 6
     letters = 'abcdefghijklmnopqrstuvwxyz'
     fig_dir = Path('../PODUAM/manuscript/figures/')
 
     # - Figure 1
     fig_name = 'figure_1_performance_cp-{alg}_{CI}_{feat}_std.png'.format(alg=alg, feat=feat, CI=CI)
 
-    fig = plt.figure(figsize=(16, 20))
-    gs = gridspec.GridSpec(5, 2, hspace=0.01, wspace=0.01)
-
+    fig = plt.figure(figsize=(16/2.54, 18.5/2.54))
+    gs = gridspec.GridSpec(5, 2, hspace=0.4, wspace=0.1, left=0.1, right=0.98, top=0.98, bottom=0.06)
+    
     # A: Prediction performance
     ax00 = fig.add_subplot(gs[0, 0])
     ax01 = fig.add_subplot(gs[0, 1], sharey=ax00)
@@ -81,18 +81,17 @@ if __name__ == "__main__":
     plot_calibration_distance(data_rd, col_uhat='uhat_std', ax=ax40, fontsize=fontsize)
     plot_calibration_distance(data_nc, col_uhat='uhat_std', ax=ax41, fontsize=fontsize)
 
-    ax00.set_title('reproductive/developmental toxicity', fontsize=fontsize + 2, fontweight='bold', pad=20)
-    ax01.set_title('general non-cancer toxicity', fontsize=fontsize + 2, fontweight='bold', pad=20)
+    ax00.set_title('reproductive/developmental toxicity', fontsize=fontsize, fontweight='bold', pad=5)
+    ax01.set_title('general non-cancer toxicity', fontsize=fontsize, fontweight='bold', pad=5)
     for ax in [ax01, ax11, ax21, ax31, ax41]:
         ax.tick_params(labelleft=False)
         ax.set_ylabel('')
     for n, ax in enumerate([ax00, ax01, ax10, ax11, ax20, ax21, ax30, ax31, ax40, ax41]):
         if n%2==0:
-            ax.text(-0.15, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',ha='right')
+            ax.text(-0.20, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 1, fontweight='bold', va='top',ha='right')
         else:
-            ax.text(-0.03, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top', ha='right')
-    gs.tight_layout(fig)
-    gs.update(left=0.1)
+            ax.text(-0.05, 1, letters[n], transform=ax.transAxes, fontsize=fontsize + 1, fontweight='bold', va='top', ha='right')
+
     fig.savefig(fig_dir / fig_name, dpi=600)
     plt.close()
 
@@ -103,15 +102,15 @@ if __name__ == "__main__":
 
     fig_name = 'SI_ENCE_over_nbatches_cp-{alg}_{CI}_{feat}_std.png'.format(alg=alg, feat=feat, CI=CI)
 
-    fig = plt.figure(figsize=(14, 7))
-    gs = gridspec.GridSpec(1, 2, left=0.05, top=0.95, bottom=0.1)
+    fig = plt.figure(figsize=(14/2.54, 7/2.54))
+    gs = gridspec.GridSpec(1, 2, right=0.95, left=0.1, top=0.9, bottom=0.15)
     ax00 = fig.add_subplot(gs[0, 0])
     ax01 = fig.add_subplot(gs[0, 1], sharey=ax00)
-    ax00.set_title('reproductive/developmental toxicity', fontsize=12, fontweight='bold')
-    ax01.set_title('general non-cancer toxicity', fontsize=12, fontweight='bold')
+    ax00.set_title('reproductive/developmental toxicity', fontsize=fontsize, fontweight='bold')
+    ax01.set_title('general non-cancer toxicity', fontsize=fontsize, fontweight='bold')
 
-    plot_ence(data_rd, batches, ax=ax00, fontsize=fontsize)
-    plot_ence(data_nc, batches, ax=ax01, fontsize=fontsize)
+    plot_ence(data_rd, batches, ax=ax00, fontsize=fontsize+1)
+    plot_ence(data_nc, batches, ax=ax01, fontsize=fontsize+1)
 
     fig.savefig(fig_dir / fig_name, dpi=600)
     plt.close()

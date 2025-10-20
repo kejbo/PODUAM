@@ -18,6 +18,12 @@ filepath = r"../PODUAM/manuscript/results/crossvalidation/"
 yhat_matrix_rd, uhat_matrix_rd, ytrue_rd = load_uam_data(filepath, 'rd')
 yhat_matrix_nc, uhat_matrix_nc, ytrue_nc = load_uam_data(filepath, 'nc')
 
+yhat_matrix_rd.to_csv('../PODUAM/manuscript/results/crossvalidation/uam_models_corr_yhat_matrix_rd.csv', index=False)
+yhat_matrix_nc.to_csv('../PODUAM/manuscript/results/crossvalidation/uam_models_corr_yhat_matrix_nc.csv', index=False)
+
+uhat_matrix_rd.to_csv('../PODUAM/manuscript/results/crossvalidation/uam_models_corr_uhat_matrix_rd.csv', index=False)
+uhat_matrix_nc.to_csv('../PODUAM/manuscript/results/crossvalidation/uam_models_corr_uhat_matrix_nc.csv', index=False)
+
 # Visualisation
 fontsize = 12
 letters = 'abcdefghijklmnopqrstuvwxyz'
@@ -83,11 +89,14 @@ df_nc = pd.DataFrame({
     'residual_abs': (yhat_matrix_nc.mean(axis=1) - ytrue_nc).abs()
 })
 
+df_rd.to_csv('../PODUAM/manuscript/results/crossvalidation/uam_models_corr_uncertainty-variability_rd.csv', index=False)
+df_nc.to_csv('../PODUAM/manuscript/results/crossvalidation/uam_models_corr_uncertainty-variability_nc.csv', index=False)
 
 # Plotting - Variability (prediction_ci) vs Mean Uncertainty
 fig_name = 'SI_uam_models_corr_uncertainty-variability.png'
 fig = plt.figure(figsize=(16, 8))
 gs = gridspec.GridSpec(1, 2)
+plt.rcParams.update({'font.size': fontsize})
 
 ax00 = fig.add_subplot(gs[0, 0])
 plot_uncertainty_variability_correlation(df_rd, ax=ax00, fontsize=fontsize)

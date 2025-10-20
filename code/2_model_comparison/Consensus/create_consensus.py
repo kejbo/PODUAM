@@ -16,7 +16,7 @@ from modules.training import *
 from modules.visuals import *
 
 # ---- SELECT DATA SET ----
-effect = 'nc'   # options: rd, nc
+effect = 'rd'   # options: rd, nc
 subset = '-std'     # options: '', -std
 
 # ---- ARGUMENT PARSER (for command-line execution) ----
@@ -81,6 +81,8 @@ if __name__ == "__main__":
                                         inplace=True)
     df_metrics_fold_cons = df_metrics_fold_cons.infer_objects()
 
+    df_metrics_fold_cons.to_csv('../PODUAM/manuscript/results/consensus/out_all_metrics_folds_{effect}.csv'.format(effect=effect+subset), index=False)
+
     # Create structured output file for cross-validated consensus predictions as mean across repetitions
     cv_cons = out_cons.groupby('ID')[['y', 'yhat', 'y_mg', 'yhat_mg', 'p']].mean()
 
@@ -98,15 +100,16 @@ if __name__ == "__main__":
     cv_cons.to_csv('../PODUAM/manuscript/results/consensus/out_cv_consensus_{effect}.csv'.format(effect=effect+subset), index=False)
 
     # SI visualisations
-    fontsize = 14
+    fontsize = 6
     letters = 'abcdefghijklmnopqrstuvwxyz'
     fig_dir = Path('../PODUAM/manuscript/figures/')
 
     # - Consensus prediction performance
     fig_name = 'SI_consensus_performance_{effect}.png'.format(effect=effect + subset)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8/2.54, 6/2.54))
+    fig.subplots_adjust(bottom=0.2)
     plot_prediction_performance(cv_cons, mg=True, internal=False, ax=ax, fontsize=fontsize)
-    plt.savefig(fig_dir / fig_name, dpi=300)
+    plt.savefig(fig_dir / fig_name, dpi=600)
     plt.close()
 
     # - Performance metric comparison for different standard ML models
@@ -125,7 +128,7 @@ if __name__ == "__main__":
                 RMSE=((df_metrics_fold_cons['RMSE'].min()-0.1).round(1), (bench['RMSE']+0.1).round(1)),
                 R2=((bench['R2']-0.1).round(1), (df_metrics_fold_cons['R2'].max()+0.1).round(1)))
 
-    fig = plt.figure(figsize=(16, 20))
+    fig = plt.figure(figsize=(16/2.54, 20/2.54))
     gs = gridspec.GridSpec(4, 1)
 
     for num, metric in enumerate(metrics_list):
@@ -133,7 +136,7 @@ if __name__ == "__main__":
         nested_cv_performance_comparison(df_metrics_fold_cons, metric, bench[metric], limits[metric], ax=ax, fontsize=fontsize)
 
     for n,ax in enumerate(fig.axes):
-        ax.text(0.02, 0.95, letters[n], transform=ax.transAxes, fontsize=fontsize + 6, fontweight='bold', va='top',
+        ax.text(0.02, 0.97, letters[n], transform=ax.transAxes, fontsize=fontsize+2, fontweight='bold', va='top',
                 ha='left')    
-    plt.savefig(fig_dir / fig_name, dpi=300)
+    plt.savefig(fig_dir / fig_name, dpi=600)
     plt.close()

@@ -61,15 +61,18 @@ if __name__ == "__main__":
         df_long = df.melt(id_vars=['layers', 'nodes', 'best_params'], value_vars=['RMSE (train)', 'RMSE (test)'],var_name='set', value_name='RMSE')
         df_long['set'] = df_long['set'].str.replace('RMSE \\(|\\)', '', regex=True)
 
+        df_long.to_csv('../PODUAM/manuscript/results/consensus/df_nn_architecture_all_{effect}{subset}.csv'.format(effect=effect, subset=subset), index=False)
+
         # Visualisation
-        fontsize = 12
+        fontsize = 16
         letters = 'abcdefghijklmnopqrstuvwxyz'
         fig_dir = Path('../PODUAM/manuscript/figures/')
 
         fig_name = 'SI_nn-architecture_{feat}_{effect}.png'.format(feat=feat, effect=effect+subset)
         fig = plt.figure(figsize=(16, 16))
         gs = gridspec.GridSpec(1, 2, wspace=0.1)
-
+        plt.rcParams.update({'font.size': fontsize})
+        
         # - by layers
         ax00 = fig.add_subplot(gs[0, 0])
         plot_rmse_nn_architecture(df_long, x='layers', xlabel='Nr of hidden layers', ax=ax00, fontsize=fontsize)

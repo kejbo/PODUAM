@@ -35,4 +35,3 @@ plot_histogram_pod(data_nc, invert=False, x_bin=0.5, ax=ax01)
 
 fig.savefig(fig_dir / fig_name, dpi=600)
 plt.close()
-

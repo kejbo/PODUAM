@@ -16,7 +16,7 @@ from modules.training import *
 effect = 'nc'   # options: rd, nc
 feat = 'rdkit'  # options: 'rdkit', 'maccs', 'cddd', 'morgan-512'
 layers = 1      # number of hidden layers (int or str)
-nodes = 'p'  # size of hidden layers as multiples of input size p (e.g. p//2, p, 2*p), single (=equal size) or list
+nodes = 'p'     # size of hidden layers as multiples of input size p (e.g. p//2, p, 2*p), single (=equal size) or list
 
 subset = '-std'
 seed = 0

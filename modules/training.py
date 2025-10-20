@@ -191,9 +191,7 @@ def findCorrelation(corr, cutoff=0.9, exact=None):
     and for the source code of `findCorrelation()`, see
     https://github.com/topepo/caret/blob/master/pkg/caret/R/findCorrelation.R
 
-    -----------------------------------------------------------------------------
-
-    Parameters:
+    Inputs:
     -----------
     corr: pandas dataframe.
         A correlation matrix as a pandas dataframe.
@@ -202,23 +200,11 @@ def findCorrelation(corr, cutoff=0.9, exact=None):
     exact: bool, default: None
         A boolean value that determines whether the average correlations be
         recomputed at each step
-    -----------------------------------------------------------------------------
-    Returns:
+    
+    Outputs:
     --------
     list of column names
-    -----------------------------------------------------------------------------
-    Example:
-    --------
-    R1 = pd.DataFrame({
-        'x1': [1.0, 0.86, 0.56, 0.32, 0.85],
-        'x2': [0.86, 1.0, 0.01, 0.74, 0.32],
-        'x3': [0.56, 0.01, 1.0, 0.65, 0.91],
-        'x4': [0.32, 0.74, 0.65, 1.0, 0.36],
-        'x5': [0.85, 0.32, 0.91, 0.36, 1.0]
-    }, index=['x1', 'x2', 'x3', 'x4', 'x5'])
 
-    findCorrelation(R1, cutoff=0.6, exact=False)  # ['x4', 'x5', 'x1', 'x3']
-    findCorrelation(R1, cutoff=0.6, exact=True)   # ['x1', 'x5', 'x4']
     """
 
     def _findCorrelation_fast(corr, avg, cutoff):
@@ -270,7 +256,6 @@ def feature_selection(X):
     """ This function allows to drop constant and highly correlated features
    from the feature matrix X
    
-
     Inputs
     ----------
     X: dataframe, mandatory
@@ -297,7 +282,6 @@ def rdkit_pipe(X_train, X_test):
    five nearest neighbors. It returns the pipeline with fitted steps alongside the 
    transformed training and test feature matrices.
    
-
     Inputs
     ----------
     X_train: dataframe, mandatory
@@ -736,8 +720,20 @@ def correlated_t_test_for_cv_pairwise_I(df_model_A, df_model_B, loss='MSE'):
 
     Outputs
     ----------
+    that: float
+        t-statistic of the paired student's t-test
+    degf: int
+        degrees of freedom of the paired student's t-test
     p: float
         p-value of the paired student's t-test
+    d: float
+        cohen's d effect size  
+    zhat: float
+        mean difference in generalization error between model A and B
+    zhat_lo: float
+        lower bound on the difference in generalization error for the 95% confidence interval
+    zhat_up: float
+        upper bound on the difference in generalization error for the 95% confidence interval
 
     """
 
@@ -757,12 +753,22 @@ def correlated_t_test_for_cv_pairwise_I(df_model_A, df_model_B, loss='MSE'):
 
     zi = ziA - ziB
     zhat = zi.mean()
+
     shat2 = 1 / (n * (n - 1)) * sum((zi - zhat) ** 2)
     sigma = shat2 ** 0.5
 
-    p = 2 * stats.t.cdf(-abs(zhat), n - 1, loc=0, scale=sigma)
+    that = zhat / sigma     # t-statistic
+    degf = n - 1            # degrees of freedom
+    p = 2 * stats.t.cdf(-abs(zhat), n - 1, loc=0, scale=sigma) # p-value
+    d = (ziA.mean() - ziB.mean()) / ((np.std(ziA, ddof=1)**2 + np.std(ziB, ddof=1)**2) / 2) ** 0.5 # cohen's d
 
-    return p
+    # confidence interval
+    zhat_lo = stats.t.ppf(0.025, degf, loc=zhat, scale=sigma)
+    zhat_up = stats.t.ppf(0.975, degf, loc=zhat, scale=sigma)
+
+    print('t=%.3f, degf=%.3f,p=%.3f, d=%.3f, z=%.3f (95%% CI: %.3f - %.3f)' % (that, degf, p, d, zhat, zhat_lo, zhat_up))
+
+    return that, degf, p, d, zhat, zhat_lo, zhat_up
 
 # - for repeated n-fold crossvalidation
 def correlated_t_test_for_cv_pairwise_II(df, model_name_A, model_name_B, folds=10, reps=10, loss='MSE'):
