@@ -3,7 +3,7 @@ PODUAM is a free and open-source uncertainty-aware prediction model (UAM)
 to predict reproductive/developmental (rd) and general non-cancer (nc) points of departure (POD) 
 with quantified uncertainty in the form of 95% confidence intervals.
 
-The models were published in doi.org/10.21203/rs.3.rs-6103978/v1 (pre-print)
+The models were published in [von Borries et al. (2025)](doi.org/10.1038/s41467-025-67374-4)
 
 The models can also be run via the [PODUAM Shiny web app](https://dtu-quantitative-sustainability-assessment.shinyapps.io/poduam)
 
